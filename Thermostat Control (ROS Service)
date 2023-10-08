@@ -1,0 +1,21 @@
+# thermostat_control_service.py
+import rospy
+from std_srvs.srv import Trigger, TriggerResponse
+from custom_msgs.msg import TemperatureLog
+
+def thermostat_control_service(request):
+    # Code to lower thermostat temperature when the cat is detected
+    # ...
+
+    response = TriggerResponse()
+    response.success = True
+    response.message = "Thermostat temperature lowered"
+    return response
+
+def main():
+    rospy.init_node('thermostat_control_node')
+    service = rospy.Service('thermostat_control', Trigger, thermostat_control_service)
+    rospy.spin()
+
+if __name__ == "__main__":
+    main()
