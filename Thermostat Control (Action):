@@ -1,0 +1,32 @@
+# temperature_log_action.py
+import rospy
+import actionlib
+from custom_msgs.msg import TemperatureLog
+from custom_msgs.msg import TemperatureLogFeedback, TemperatureLogResult, TemperatureLogGoal
+
+class TemperatureLogActionServer:
+    def __init__(self):
+        self._as = actionlib.SimpleActionServer('temperature_log_action', TemperatureLogAction, self.execute, False)
+        self._as.start()
+
+    def execute(self, goal):
+        # Code to log temperature changes based on detected events
+        # ...
+
+        # Publish feedback (for demonstration purposes)
+        feedback = TemperatureLogFeedback()
+        feedback.feedback_info = "Temperature change logged"
+        self._as.publish_feedback(feedback)
+
+        # Return result (for demonstration purposes)
+        result = TemperatureLogResult()
+        result.result_info = "Temperature log completed"
+        self._as.set_succeeded(result)
+
+def main():
+    rospy.init_node('temperature_log_action_server')
+    action_server = TemperatureLogActionServer()
+    rospy.spin()
+
+if __name__ == "__main__":
+    main()
