@@ -1,0 +1,21 @@
+# lights_control_service.py
+import rospy
+from std_srvs.srv import Trigger, TriggerResponse
+from custom_msgs.msg import LightIntensity
+
+def lights_control_service(request):
+    # Code to turn on the lights
+    # ...
+
+    response = TriggerResponse()
+    response.success = True
+    response.message = "Lights turned on"
+    return response
+
+def main():
+    rospy.init_node('lights_control_node')
+    service = rospy.Service('lights_control', Trigger, lights_control_service)
+    rospy.spin()
+
+if __name__ == "__main__":
+    main()
